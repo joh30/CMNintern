@@ -1,9 +1,22 @@
 scrapy shell 'https://www.nytimes.com/2019/03/04/us/rural-nursing-homes-closure.html?action=click&module=Top%20Stories&pgtype=Homepage'
 
-#response.xpath(‘// meta[ @ property =“og:title”] /@content’).extract()
-#response.xpath('// meta[ @ property ="og:type"]/@content').extract()
-#response.xpath(‘// meta[ @ property =“og:image”] /@content’).extract()
-#response.xpath(‘// meta[ @ property =“og:description”] /@content’).extract()
-#response.xpath(‘// meta[ @ property =“og:url”] /@content’).extract()
-#response.xpath(‘// meta[ @ property =“article:published”] /@content’).extract()
-#response.xpath(‘// meta[ @ property ="article:tag”] /@content’).extract_all()
+
+ValueError: invalid hostname: 'https
+'module' is not recognized as an internal or external command,
+operable program or batch file.
+'pgtype' is not recognized as an internal or external command,
+operable program or batch file.
+
+
+
+#Pycharm terminal INPUT (
+response.xpath(‘// meta[ @ property =“og:title”] /@content’).extract()
+response.xpath('// meta[ @ property ="og:type"]/@content').extract()
+response.xpath(‘// meta[ @ property =“og:image”] /@content’).extract()
+response.xpath(‘// meta[ @ property =“og:description”] /@content’).extract()
+response.xpath(‘// meta[ @ property =“og:url”] /@content’).extract()
+response.xpath(‘// meta[ @ property =“article:published”] /@content’).extract()
+response.xpath(‘// meta[ @ property ="article:tag”] /@content’).extract_all()
+
+'response.xpath' is not recognized as an internal or external command,
+operable program or batch file.
