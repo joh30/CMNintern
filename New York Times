@@ -22,3 +22,5 @@ scrapy shell https://www.nytimes.com/2019/03/04/us/rural-nursing-homes-closure.h
 >>> response.xpath("// meta[ @ property ='article:tag']/@content").extract()
 ['Nursing Homes', 'Rural Areas', 'Elderly', 'Elder Care', 'Shutdowns (Institutional)', 'Health Insurance and Managed Care', 'Medicaid', 'MOBRIDGE (SD)', 'South Dakota']
 
+>>> response.xpath("// meta[ @property ='twitter:url']/@content").extract()
+['https://www.nytimes.com/2019/03/04/us/rural-nursing-homes-closure.html']
