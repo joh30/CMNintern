@@ -1,22 +1,24 @@
-scrapy shell 'https://www.nytimes.com/2019/03/04/us/rural-nursing-homes-closure.html?action=click&module=Top%20Stories&pgtype=Homepage'
+scrapy shell https://www.nytimes.com/2019/03/04/us/rural-nursing-homes-closure.html?action=click&module=Top%20Stories&pgtype=Homepage
 
 
-ValueError: invalid hostname: 'https
-'module' is not recognized as an internal or external command,
-operable program or batch file.
-'pgtype' is not recognized as an internal or external command,
-operable program or batch file.
+>>> response.xpath("// meta[ @ property ='og:title'] /@content").extract()
+['Nursing Homes Are Closing Across Rural America, Scattering Residents']
 
+>>> response.xpath("// meta[ @ property ='og:type']/@content").extract()
+['article']
 
+>>> response.xpath("// meta[ @ property ='og:image'] /@content").extract()
+['https://static01.nyt.com/images/2019/03/01/us/00dakota-07/00dakota-07-facebookJumbo.jpg']
 
-#Pycharm terminal INPUT (
-response.xpath(‘// meta[ @ property =“og:title”] /@content’).extract()
-response.xpath('// meta[ @ property ="og:type"]/@content').extract()
-response.xpath(‘// meta[ @ property =“og:image”] /@content’).extract()
-response.xpath(‘// meta[ @ property =“og:description”] /@content’).extract()
-response.xpath(‘// meta[ @ property =“og:url”] /@content’).extract()
-response.xpath(‘// meta[ @ property =“article:published”] /@content’).extract()
-response.xpath(‘// meta[ @ property ="article:tag”] /@content’).extract_all()
+>>> response.xpath("// meta[ @ property ='og:description'] /@content").extract()
+['As financial pressures have forced scores of small-town nursing homes to shut down, their residents often must relocate far from their families to find care.']
 
-'response.xpath' is not recognized as an internal or external command,
-operable program or batch file.
+>>> response.xpath("// meta[ @ property ='og:url']/@content").extract()
+['https://www.nytimes.com/2019/03/04/us/rural-nursing-homes-closure.html']
+
+>>> response.xpath("// meta[ @ property ='article:published']/@content").extract()
+['2019-03-04T08:00:07.000Z']
+
+>>> response.xpath("// meta[ @ property ='article:tag']/@content").extract()
+['Nursing Homes', 'Rural Areas', 'Elderly', 'Elder Care', 'Shutdowns (Institutional)', 'Health Insurance and Managed Care', 'Medicaid', 'MOBRIDGE (SD)', 'South Dakota']
+
