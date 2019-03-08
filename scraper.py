@@ -21,7 +21,8 @@ class BrickSetSpider(scrapy.Spider):
                 'minifigs': brickset.xpath(MINIFIGS_SELECTOR).extract_first(),
                 'image': brickset.css(IMAGE_SELECTOR).extract_first(),
             }
-
+_________________________________________________________________________________________________________________________________________
+#OTHER EXAMPLES
 '''
 '''
 class RedditSpider(scrapy.Spider):
