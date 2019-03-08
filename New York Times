@@ -24,3 +24,56 @@ scrapy shell https://www.nytimes.com/2019/03/04/us/rural-nursing-homes-closure.h
 
 >>> response.xpath("// meta[ @property ='twitter:url']/@content").extract()
 ['https://www.nytimes.com/2019/03/04/us/rural-nursing-homes-closure.html']
+
+
+
+#WEB CRAWLER SCRIPT
+#EXAMPLE 1
+import scrapy
+
+
+class BrickSetSpider(scrapy.Spider):
+    name = 'brick_spider'
+    start_urls = ['https://www.nytimes.com/']
+
+    def parse(self, response):
+        SET_SELECTOR = '.set'
+        for brickset in response.css(SET_SELECTOR):
+            TITLE_SELECTOR = "// meta[ @ property ='og:title'] /@content"
+            TYPE_SELECTOR = "// meta[ @ property ='og:type']/@content"
+            IMAGE_SELECTOR = "// meta[ @ property ='og:image'] /@content"
+            DESCRIPTION_SELECTOR = "// meta[ @ property ='og:description'] /@content"
+            URL_SELECTOR = "// meta[ @ property ='og:url']/@content"
+            PUBLISHED_SELECTOR = "// meta[ @ property ='article:published']/@content"
+            TAG_SELECTOR = "// meta[ @ property ='article:tag']/@content"
+            TWITTER_URL_SELECTOR = "// meta[ @property ='twitter:url']/@content"
+
+            yield{
+                'name': brickset.xpath(TITLE_SELECTOR).extract(),
+                'type': brickset.xpath(TYPE_SELECTOR).extract(),
+                'image': brickset.xpath(TYPE_SELECTOR).extract(),
+                'description': brickset.xpath(TYPE_SELECTOR).extract(),
+                'url': brickset.xpath(TYPE_SELECTOR).extract(),
+                'published': brickset.xpath(TYPE_SELECTOR).extract(),
+                'tag': brickset.xpath(TYPE_SELECTOR).extract(),
+                'twitter url': brickset.xpath(TYPE_SELECTOR).extract(),
+            }
+
+#EXAMPLE 2
+import scrapy
+
+class NewYorkTimes(scrapy.Spider):
+    name = 'ny_spider'
+    start_urls = ['https://www.nytimes.com/']
+
+    def parse(self, response):
+        SET_SELECTOR = '.set'
+        for NewYork in response.css(SET_SELECTOR):
+            response.xpath("// meta[ @ property ='og:title'] /@content").extract()
+            response.xpath("// meta[ @ property ='og:type']/@content").extract()
+            response.xpath("// meta[ @ property ='og:image'] /@content").extract()
+            response.xpath("// meta[ @ property ='og:description'] /@content").extract()
+            response.xpath("// meta[ @ property ='og:url']/@content").extract()
+            response.xpath("// meta[ @ property ='article:published']/@content").extract()
+            response.xpath("// meta[ @ property ='article:tag']/@content").extract()
+            response.xpath("// meta[ @property ='twitter:url']/@content").extract()
