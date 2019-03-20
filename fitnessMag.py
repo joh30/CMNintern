@@ -11,9 +11,11 @@ class fitnessMagazineSpider(scrapy.Spider):
     def parse(self, response):
         print("procesing:" + response.url)
         
+        
         # Extract data using css selectors
         #article_subtitle = response.css('.field-content::p').extract()
         article_image = response.css('img::attr(src)').extract()
+
         
         # Extract data using xpath
         article_title = response.xpath("//h4[@class='field-content']/a/text()").extract()
@@ -21,10 +23,10 @@ class fitnessMagazineSpider(scrapy.Spider):
         article_category = response.xpath("//div[@class='field-content']/a/text()").extract()
         article_creation = response.xpath("//em[@class='placeholder']/text()").extract()
         article_subtitle = response.xpath("//meta[@property='og:description']/@content").extract()
+        article_updateTime = response.xpath("//meta[@property='og:updated_time']/@content").extract()
+    
 
-
-
-        row_data = zip(article_title, article_image, article_author, article_category, article_creation, article_subtitle)
+        row_data = zip(article_title, article_image, article_author, article_category, article_creation, article_subtitle, article_updateTime)
 
         # Making extracted data row wise
         for item in row_data:
@@ -37,7 +39,8 @@ class fitnessMagazineSpider(scrapy.Spider):
                 'article_author': item[2],
                 'article_category': item[3],
                 'article_creation': item[4],
-                'article_subtitle': item[5]
+                'article_subtitle': item[5],
+                'article_updateTime': item[6]
 
             }
 
