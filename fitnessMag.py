@@ -10,15 +10,18 @@ class fitnessMagazineSpider(scrapy.Spider):
 
     def parse(self, response):
         print("procesing:" + response.url)
+        
         # Extract data using css selectors
+        #article_subtitle = response.css('.field-content::p').extract()
+        article_image = response.css('img::attr(src)').extract()
+        
         # Extract data using xpath
         article_title = response.xpath("//h4[@class='field-content']/a/text()").extract()
         article_author = response.xpath("//span[@class='byline']/a/text()").extract()
         article_category = response.xpath("//div[@class='field-content']/a/text()").extract()
         article_creation = response.xpath("//em[@class='placeholder']/text()").extract()
         article_subtitle = response.xpath("//meta[@property='og:description']/@content").extract()
-        #article_subtitle = response.css('.field-content::p').extract()
-        article_image = response.css('img::attr(src)').extract()
+
 
 
         row_data = zip(article_title, article_image, article_author, article_category, article_creation, article_subtitle)
