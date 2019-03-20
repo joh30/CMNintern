@@ -16,15 +16,12 @@ class fitnessMagazineSpider(scrapy.Spider):
         article_author = response.xpath("//span[@class='byline']/a/text()").extract()
         article_category = response.xpath("//div[@class='field-content']/a/text()").extract()
         article_creation = response.xpath("//em[@class='placeholder']/text()").extract()
-        article_image = response.css('img::attr(src)').extract()
-        
-        #THIS DOESN'T WORK. I DON'T KNOW WHY. GAHHH
-        #article_subtitle = response.xpath("//div[@class='word-link']/a/text()").extract()
+        article_subtitle = response.xpath("//meta[@property='og:description']/@content").extract()
         #article_subtitle = response.css('.field-content::p').extract()
-        
+        article_image = response.css('img::attr(src)').extract()
 
 
-        row_data = zip(article_title, article_image, article_author, article_category, article_creation, #article_subtitle)
+        row_data = zip(article_title, article_image, article_author, article_category, article_creation, article_subtitle)
 
         # Making extracted data row wise
         for item in row_data:
@@ -37,7 +34,7 @@ class fitnessMagazineSpider(scrapy.Spider):
                 'article_author': item[2],
                 'article_category': item[3],
                 'article_creation': item[4],
-               # 'article_subtitle': item[5]
+                'article_subtitle': item[5]
 
             }
 
@@ -45,3 +42,10 @@ class fitnessMagazineSpider(scrapy.Spider):
 
             # yield or give the scraped info to scrapy
             yield scraped_info
+
+            NEXT_PAGE_SELECTOR = '.ui-pagination-active + a::attr(href)'
+            next_page = response.css(NEXT_PAGE_SELECTOR).extract_first()
+            if next_page:
+                yield scrapy.Request(
+                    response.urljoin(next_page),
+                    callback=self.parse)
